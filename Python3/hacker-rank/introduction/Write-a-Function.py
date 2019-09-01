@@ -9,6 +9,7 @@
 #
 # Output: year-state print leap years only.
 
+
 def is_leap(year):
     # Write your logic here
     leap = False

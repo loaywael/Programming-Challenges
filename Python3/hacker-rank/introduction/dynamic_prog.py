@@ -1,5 +1,5 @@
 from time import time
- 
+
 
 def fibo(n):
 	"""

@@ -22,7 +22,7 @@ def d_memo_fibo(n, lookup):
 	:returns: lookup[n]: (int) output of fibonacci.
 
 	"""
-	if n==1 or n==0:
+	if n <= 1:
 		lookup[n] = n
 
 	elif n not in lookup:

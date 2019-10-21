@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "bmp.h"
 
+
 int main(int argc, char *argv[]){
 
 	if (argc < 3){	// if not given read/write files names

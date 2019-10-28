@@ -4,7 +4,6 @@
 Person::Person(){}; 
 
 void Person::SetName(string name){
-    // this->name === Person::name
     this->name = name;  // this === self
 }
 

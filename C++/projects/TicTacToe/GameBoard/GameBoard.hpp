@@ -1,12 +1,10 @@
-#include<iostream>
-#include<string>
 #include "Player.hpp"
 using namespace std;
 
 class GameBoard{
 
     private:
-        const int MAX_ROUNDS;
+        const int MAX_ROUNDS;   // 
         const int BOARD_SIZE;
         int rowIndex, colIndex;
         char **board = new char *[BOARD_SIZE];

@@ -1,4 +1,4 @@
-#include "playGame.hpp"
+#include "GameBoard.hpp"
 
 
 int main(void){

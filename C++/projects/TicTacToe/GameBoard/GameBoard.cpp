@@ -28,13 +28,15 @@ void GameBoard::updateBoard(){
     }
 }
 
-void GameBoard::placeMarker(Player &player, int row, int column){
+bool GameBoard::placeMarker(Player &player, int row, int column){
     // update the board space for each player turn
-    
-    cout << "player[1] turn" << endl;
+    if (row >= BOARD_SIZE || column >= BOARD_SIZE){
+        cout << "incorrect value: exceeded board limits!\n";
+        return false;
+    }
     board[row][column] = player.getPlayerMarker();
     this->updateBoard();
-
+    return true;
 }
 
 int GameBoard::checkResult(Player &player){

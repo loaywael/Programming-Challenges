@@ -13,7 +13,7 @@ class GameBoard{
     public:
         GameBoard(int size);
         ~GameBoard();
-        void placeMarker(Player &player, int row, int column);
+        bool placeMarker(Player &player, int row, int column);
         void updateBoard();
         int checkResult(Player &player);
 };

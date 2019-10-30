@@ -10,6 +10,7 @@ PLAYER_NAME(name), PLAYER_MARKER(marker){
 //     playerTurn = turn;
 // }
 
+
 void Player::setPlayerResult(bool result){
     playerResult = result;
 }

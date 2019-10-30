@@ -1,7 +1,7 @@
 #include "GameBoard.hpp"
 
 GameBoard::GameBoard(int size): 
-BOARD_SIZE(size), MAX_ROUNDS((BOARD_SIZE * BOARD_SIZE) / 2){
+BOARD_SIZE(size), MAX_ROUNDS((size * size) / 2){
     // dynamically init the board with '-' in each empty space
     roundsCounter = 0;
     rowIndex = 0, colIndex = 0;
@@ -56,22 +56,21 @@ bool GameBoard::_placeMarker(Player &player, int row, int column){
 void GameBoard::takeTurns(Player &player){
     bool correctIndex = false;
     do {
-            cout << "\nplayer " << player.getPlayerName() << " turn!" << endl;
-            cout << "set marker location!\n";
-            cout << "row index >>> ";
-            cin >> rowIndex;
-            cout << "column index >>> ";
-            cin >> colIndex;
-            cout << endl;
-            correctIndex = this->_placeMarker(player, rowIndex, colIndex);
-        }while (!correctIndex);
-
+        cout << "\nplayer " << player.getPlayerName() << " turn!" << endl;
+        cout << "set marker location!\n";
+        cout << "row index >>> ";
+        cin >> rowIndex;
+        cout << "column index >>> ";
+        cin >> colIndex;
+        cout << endl;
+        correctIndex = this->_placeMarker(player, rowIndex, colIndex);
+    }while (!correctIndex);
 }
 
-int GameBoard::checkResult(Player &player){
-    /*  checks for each player that may have any 
-        row, column, or diagonal filled with marks
-        decide a winner or return game over
+bool GameBoard::checkRows(Player &player){
+    /*  checks for each player that may have any row filled 
+        with marks to decide a winner or return game over
+        simplest determnistic condition <upgradable>
     */
     for (int i = 0; i < BOARD_SIZE; i++){
         int rowCnt = 0;
@@ -81,10 +80,8 @@ int GameBoard::checkResult(Player &player){
             }
         }    
         if (rowCnt == BOARD_SIZE){
-            player.setPlayerResult(true);
-            return 1;
+            return true;
         }
     }
-    
-    return 0;
+    return false;
 }

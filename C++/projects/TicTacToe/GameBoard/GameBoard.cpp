@@ -2,7 +2,7 @@
 
 GameBoard::GameBoard(int size): 
 BOARD_SIZE(size), MAX_ROUNDS((size * size) / 2){
-    // dynamically init the board with '-' in each empty space
+    // dynamically init the board with '-' as an empty space
     roundsCounter = 0;
     rowIndex = 0, colIndex = 0;
     for (int i = 0; i < BOARD_SIZE; i++){
@@ -20,9 +20,9 @@ int GameBoard::getMaxRounds(){
 GameBoard::~GameBoard(){
     // release the memory allocated for the board array
     for (int i = 0; i < BOARD_SIZE; i++){
-        delete[] board[i];
+        delete[] board[i];  // release column for each row
     }
-    delete board;
+    delete board;   // rlease rows
 }
 
 void GameBoard::updateBoard(){

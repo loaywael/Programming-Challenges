@@ -7,7 +7,7 @@ class GameBoard{
         const int MAX_ROUNDS;   // 
         const int BOARD_SIZE;
         int rowIndex, colIndex;
-        char **board = new char *[BOARD_SIZE];
+        char **board;
 
     public:
         GameBoard(int size);

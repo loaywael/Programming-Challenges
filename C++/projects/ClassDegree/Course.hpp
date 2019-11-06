@@ -12,10 +12,9 @@ class Course
     public:
         Course();
         Course(int numStudents, int numTeachers);
-        Student *students = new Student [STUDENTS_SIZE];
-        Teacher *teachers = new Teacher [TEACHERS_SIZE];
+        Student *students;
+        Teacher *teachers;
         ~Course();
-    
 };
 
 

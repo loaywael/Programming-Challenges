@@ -12,10 +12,12 @@ class Stack{
         Stack(const int& maxSize);
         ~Stack();
         void push(T item);
-        void pop();
-        bool isEmpty();
+        T pop(void);
+        bool isEmpty(void);
+        bool isFull(void);
         T getTop(void);
-        void printStack(void);
+        int getSize(void);
+        void display(void);
 };
 
 #endif

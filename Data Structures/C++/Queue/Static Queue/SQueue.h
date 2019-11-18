@@ -6,7 +6,7 @@ namespace SQueue{
     class Queue{
         private:
             T* buffer;
-            int head, tail, cnt;
+            int head, tail, length;
             const int MAX_SIZE;
         public:
             Queue(const int& maxSize);
@@ -25,7 +25,7 @@ namespace SQueue{
 
 template <class T>
 SQueue::Queue<T>::Queue(const int& maxSize):MAX_SIZE(maxSize){
-    cnt = 0;
+    length = 0;
     head = 0;
     tail = MAX_SIZE - 1;
     buffer = new T [MAX_SIZE];
@@ -38,46 +38,46 @@ SQueue::Queue<T>::~Queue(){
 
 template <class T>
 void SQueue::Queue<T>::insert(T item){
-    if (isEmpty()){
-        buffer[head] = item;
-    }
-
     if (isFull()){
         std::cerr << "Queue is Full can't insert anymore!\n\n";
     }
     else{
-        tail= (tail + 1) % MAX_SIZE;
+        tail = (tail + 1) % MAX_SIZE;
         buffer[tail] = item; 
-        cnt++;
+        length++;
     }
-    
 }
 
 template <class T>
 void SQueue::Queue<T>::display(){
-    std::cout << "[";
+    
     if (!isEmpty()){
-        for (int i = head; i <= tail; i++){
+        std::cout << "[";
+        for (size_t i = head; i != tail; i = (i+1) % MAX_SIZE){
             std::cout << buffer[i] << " ";
         }
+        std::cout << buffer[tail] << "]" << std::endl;
     }
-    std::cout << "]" << std::endl;
+    else{
+        std::cout << "[ ]" << std::endl;
+    }
+    
     
 }
 
 template <class T>
 bool SQueue::Queue<T>::isFull(){
-    return cnt == MAX_SIZE;
+    return length == MAX_SIZE;
 }
 
 template <class T>
 bool SQueue::Queue<T>::isEmpty(){
-    return getSize() == 0;
+    return length == 0;
 }
 
 template <class T>
 int SQueue::Queue<T>::getSize(){
-    return cnt;
+    return length;
 }
 
 template <class T>
@@ -99,7 +99,7 @@ T SQueue::Queue<T>::pop(){
     else{
         item = buffer[head];
         head = (head + 1) % MAX_SIZE; 
-        cnt--;
+        length--;
     }
     
     return item;

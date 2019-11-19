@@ -22,6 +22,7 @@ namespace DQueue{
             ~Queue();
             void insert(T item);
             void display();
+            void clean();
             int getSize();
             bool isEmpty();
             T pop();
@@ -41,6 +42,8 @@ DQueue::Queue<T>::Queue(){
 template <class T>
 DQueue::Queue<T>::~Queue(){
     std::cout << "memory cleaned!" << std::endl;
+    this->clean();
+    this->display();    
 }
 
 template <class T>
@@ -128,4 +131,17 @@ T DQueue::Queue<T>::getTail(){
     else{
         return tail->info;
     }
+}
+
+template <class T>
+void DQueue::Queue<T>::clean(){
+    while (head != nullptr){
+        temp = head;
+        head = head->next;
+        delete temp;
+    }  
+    length = 0;
+    temp = nullptr;
+    head = nullptr;
+    tail = nullptr;
 }

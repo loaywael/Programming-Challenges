@@ -1,77 +1,81 @@
-#pragma once
-#include <iostream>
 
-namespace DQueue{
-    template <class T>
-    class Queue{
+#include "Deque.hpp"
 
-        private:
-            const int MAX_SIZE;
-            int head, tail, length;
-            T* buffer;
- 
-        public:
-            Queue(const int& maxSize);
-            ~Queue();
-            void insertHead(T item);
-            void insertTail(T item);
-            void display();
-            void clean();
-            int getSize();
-            bool isEmpty();
-            bool isFull();
-            T popHead();
-            T popTail();
-            T getHead();
-            T getTail();
-    };
-}
 
 template <class T>
-DQueue::Queue<T>::Queue(const int& maxSize): MAX_SIZE(maxSize){
-    head = 0;
-    tail = MAX_SIZE - 1;
+DQueue::Queue<T>::Queue(){
+    head = nullptr;
+    tail = nullptr;
+    temp = nullptr;
     length = 0;
-    buffer = new T [MAX_SIZE];
 }
 
 template <class T>
 DQueue::Queue<T>::~Queue(){
-    delete[] buffer;
-    buffer = nullptr;
+    this->clean();
     std::cout << "Queue memory cleaned!: ";
     this->display();    
 }
 
 template <class T>
 void DQueue::Queue<T>::insertTail(T item){
+    Node* node = new Node;
 
-    if (isFull()){
-    // special case when it is empty
-        std::cerr << "Queue is full! can't insert anymore!\n\n"; 
+    if (!node){
+        std::cerr << "memory not available!\n";
     }
-    
+
     else{
-       tail = (tail + 1) % MAX_SIZE;
-        buffer[tail] = item;
-        length++;
+        if (isEmpty()){
+        // special case when it is empty
+            head = node;
+            tail = head;
+            node->next = nullptr;
+            node->info = item;
+            node->last = nullptr;
+            length++;
+        }
+        
+        else{
+            tail->next = node;
+            node->info = item;
+            node->last = tail;
+            node->next = nullptr;
+            tail = node;
+            length++;
+        }
     }
-} 
-
+}
 
 template <class T>
 void DQueue::Queue<T>::insertHead(T item){
-        if (isFull()){
-    // special case when it is empty
-        std::cerr << "Queue is full! can't insert anymore!\n\n"; 
-    }
     
-    else{
-       head = (head + 1) % MAX_SIZE;
-        buffer[head] = item;
-        length++;
+    Node* node = new Node;
+    if (!node){
+        std::cerr << "memory not available!\n";
     }
-} 
+
+    else{
+        if (isEmpty()){
+        // special case when it is empty
+            head = node;
+            tail = head;
+            node->next = nullptr;
+            node->info = item;
+            node->last = nullptr;
+            length++;
+        }
+        
+        else{
+            head->last = node;
+            node->info = item;
+            node->next = head;
+            node->last = nullptr;
+            head = node;
+            length++;
+        }
+    }
+}
 
 template <class T>
 void DQueue::Queue<T>::display(){
@@ -99,11 +103,6 @@ bool DQueue::Queue<T>::isEmpty(){
 }
 
 template <class T>
-bool DQueue::Queue<T>::isFull(){
-    return length == MAX_SIZE;
-}
-
-template <class T>
 T DQueue::Queue<T>::popHead(){
     T item;
 
@@ -111,15 +110,22 @@ T DQueue::Queue<T>::popHead(){
         throw "Queue is empty!\n\n";
     }
 
+    else if (length == 1){
+        delete head;
+        length--;
+    }
+    
     else{
         temp = head;  // save the feed backward link
         item = head->info;
         // move the tail to point to the following node after the first node
         head = head->next;
+        head->last = nullptr;
         delete temp;   // delete the first node
         temp = nullptr; // prevent dangling pointer
         length--;
     }
+
     return item;
 }
 
@@ -131,11 +137,17 @@ T DQueue::Queue<T>::popTail(){
         throw "Queue is empty!\n\n";
     }
 
+    else if (length == 1){
+        delete tail;
+        length--;
+    }
+    
     else{
         temp = tail;  // save the feed backward link
         item = tail->info;
         // move the tail to point to the following node after the first node
-        tail = tail->next;
+        tail = tail->last;
+        tail->next = nullptr;
         delete temp;   // delete the first node
         temp = nullptr; // prevent dangling pointer
         length--;
@@ -180,3 +192,8 @@ void DQueue::Queue<T>::clean(){
     temp = nullptr;
     tail = nullptr;
 }
+
+template class DQueue::Queue<int>;
+template class DQueue::Queue<float>;
+template class DQueue::Queue<std::string>;
+template class DQueue::Queue<char>;

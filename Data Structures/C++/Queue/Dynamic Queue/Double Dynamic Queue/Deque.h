@@ -148,6 +148,7 @@ T DQueue::Queue<T>::popHead(){
         item = head->info;
         // move the tail to point to the following node after the first node
         head = head->next;
+        head->last = nullptr;
         delete temp;   // delete the first node
         temp = nullptr; // prevent dangling pointer
         length--;
@@ -167,7 +168,8 @@ T DQueue::Queue<T>::popTail(){
         temp = tail;  // save the feed backward link
         item = tail->info;
         // move the tail to point to the following node after the first node
-        tail = tail->next;
+        tail = tail->last;
+        tail->next = nullptr;
         delete temp;   // delete the first node
         temp = nullptr; // prevent dangling pointer
         length--;

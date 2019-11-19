@@ -42,8 +42,8 @@ DQueue::Queue<T>::Queue(){
 template <class T>
 DQueue::Queue<T>::~Queue(){
     this->clean();
-    std::cout << "memory cleaned!" << std::endl;
-    // this->display();    
+    std::cout << "Queue memory cleaned!: ";
+    this->display();    
 }
 
 template <class T>
@@ -64,12 +64,10 @@ void DQueue::Queue<T>::insert(T item){
         }
         
         else{
-            temp = tail->next; // save the last tail feed backward
+            node->next = tail->next; // save the last tail feed backward in the last added node
             tail->next = node;    // point the last tail node to the newest node
-            tail = node;
-            node->next = temp;  // point the newest node to the first in queue feed backward
+            tail = node;    // update the tail with the newest node
             node->info = item;  // save the value in the new node
-            temp = nullptr;   // prevent dangling pointer
             length++;
         } 
     }
@@ -145,11 +143,14 @@ T DQueue::Queue<T>::getTail(){
 
 template <class T>
 void DQueue::Queue<T>::clean(){
-    while (tail->next != tail){
-        temp = tail->next;
-        tail->next = temp->next;
-        delete temp;
-    }  
+    if (!isEmpty()){
+        while (tail->next != tail){
+            temp = tail->next;
+            tail->next = temp->next;
+            delete temp;
+        }  
+    }
+    
     length = 0;
     temp = nullptr;
     tail = nullptr;

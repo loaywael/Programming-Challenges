@@ -49,22 +49,28 @@ DQueue::Queue<T>::~Queue(){
 template <class T>
 void DQueue::Queue<T>::insert(T item){
     Node* node = new Node;
-    if (isEmpty()){
-        // special case when it is empty
-        head = node;
-        head->next = nullptr;
-        tail = head;
-        node->info = item;
-        length++;
+    if (!node){
+        std::cerr << "memory not available!\n";
     }
-    
+
     else{
-        tail->next = node; // previouse node linked to the newest
-        tail = node;    // update tail address of the newest node
-        node->info = item;
-        node->next = nullptr;   // make it the last node in queue
-        length++;
-    } 
+        if (isEmpty()){
+        // special case when it is empty
+            head = node;
+            head->next = nullptr;
+            tail = head;
+            node->info = item;
+            length++;
+        }
+        
+        else{
+            tail->next = node; // previouse node linked to the newest
+            tail = node;    // update tail address of the newest node
+            node->info = item;
+            node->next = nullptr;   // make it the last node in queue
+            length++;
+        } 
+    }
 }
 
 template <class T>

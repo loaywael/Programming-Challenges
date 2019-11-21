@@ -110,9 +110,9 @@ int getPriority(const char& ch){
     return priority;
 }
 
-// template <class T>
+//template <class T>
 int evalPostFix(const std::string& postfix){
-    std::stack<int> buffer;
+    std::stack<T> buffer;
     int value, num1, num2;
 
     for (const char ch : postfix){
@@ -134,12 +134,13 @@ int evalPostFix(const std::string& postfix){
     return value;
 }
 
-
+//template <class T>
 int getOperation(const char& ch, const int x, const int y){
     /*
-        Returns the priority of a given special characters
-        @param ch: char reference of a given char to be evaluated
-        returns priority: integer value of the special char priority
+        Returns result of a given operation
+        @param ch: reference of a given char to be evaluated
+        @param x: first number to operate
+        @param y:  second number to operate
     */
     int result;
     switch (ch){
@@ -170,3 +171,6 @@ int getOperation(const char& ch, const int x, const int y){
     }
     return result;
 }
+
+//template int evalPostFix(const std::string& postfix);
+//template int getOperation(const char&, const int, const int);

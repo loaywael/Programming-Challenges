@@ -110,15 +110,14 @@ int getPriority(const char& ch){
     return priority;
 }
 
-//template <class T>
+// template <class T>
 int evalPostFix(const std::string& postfix){
-    std::stack<T> buffer;
+    std::stack<int> buffer;
     int value, num1, num2;
 
     for (const char ch : postfix){
         if (isdigit(ch)){
-            num1 = ch - '0';
-            buffer.push(num1);
+            buffer.push(ch - '0');
         }
         
         else if (getPriority(ch) > 0 && buffer.size() >= 2){
@@ -126,15 +125,16 @@ int evalPostFix(const std::string& postfix){
             buffer.pop();
             num2 = buffer.top();
             buffer.pop();
-            value = getOperation(ch, num1, num2);
+            value = getOperation(ch, num2, num1);
             buffer.push(value);
         }
-        value = buffer.top();
     } 
+    value = buffer.top();
+    buffer.pop();
     return value;
 }
 
-//template <class T>
+// template <class T>
 int getOperation(const char& ch, const int x, const int y){
     /*
         Returns result of a given operation
@@ -172,5 +172,5 @@ int getOperation(const char& ch, const int x, const int y){
     return result;
 }
 
-//template int evalPostFix(const std::string& postfix);
-//template int getOperation(const char&, const int, const int);
+// template int evalPostFix<int>(const std::string& postfix);
+// template int getOperation<int>(const char&, const int, const int);

@@ -79,10 +79,8 @@ int linkedList::List<T>::find(T item){
             if (list[i] == item){
                 return i;
             }
-            else{
-                std::cerr << "item not found!\n";
-            }
         }
+        std::cerr << "item not found!\n";
     }
     else{
         std::cerr << "list is empty!\n";

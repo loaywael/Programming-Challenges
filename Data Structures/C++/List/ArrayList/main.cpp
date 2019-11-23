@@ -49,7 +49,8 @@ int main(int argc, char** argv){
             case '4':
                 std::cout << "enter item: ";
                 std::cin >> item;
-                list.find(item);
+                idx = list.find(item);
+                std::cout << "found at index: " << idx << std::endl;
                 break;
 
             case '5':

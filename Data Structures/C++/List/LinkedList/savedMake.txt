@@ -1,0 +1,54 @@
+#
+# Author: Loay Wael
+#
+# LinkedList Data Structure
+#
+# This is the Makefile for the program
+#
+
+# Program Name: 
+PROG = List
+
+# Compiler and Flags:
+CXX = g++ -std=c++11
+CFLAGS = -Wall -c
+LFLAGS = -Wall -o
+
+BIN = .
+SRC = ../src
+OBJS = main.o LinkedList.o
+
+all: $(PROG) tar
+
+# Building stage
+$(BIN)/$(PROG): $(BIN)/$(OBJS)
+	@echo "-----------------------------------"
+	@echo "Creating the executable for the app"
+	@echo "-----------------------------------"
+	$(CXX) $(LFLAGS) $(PROG) $(BIN)/$(OBJS)
+	
+%.o : %.cpp
+	@echo "-----------------------------------"
+	@echo "Compiling the file $<"
+	@echo "-----------------------------------"
+	$(CXX) $(CFLAGS) $<
+	
+# Cleaning stage
+clean:
+	@echo "-----------------------------------"
+	@echo "Cleaning unnecessary files"
+	@echo "-----------------------------------"
+	rm *.o
+
+tar:
+	@echo "-----------------------------------"
+	@echo "Packing source code into .tar file"
+	@echo "-----------------------------------"
+	tar cfv makeList.tar makefile $(SRC)/*.cpp $(SRC)/*.hpp
+	
+		
+# Dependancies
+LinkedList.o : $(SRC)/LinkedList.cpp
+main.o 		 : $(SRC)/main.cpp
+
+

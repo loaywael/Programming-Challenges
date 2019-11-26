@@ -39,16 +39,13 @@ inline void LinkedList::List<T>::insert(T item, int index) {
 		}
 
 		else{
-			int i = 1;	// when a new node added to existing node and not the first index
-			for (Node* ptr = head; ptr!=nullptr; ptr= ptr->next) {
-				if (i == index) {	// iterating
-					node->next = ptr->next;
-					ptr->next = node;
-					length++;
-					break;
-				}
-				i++;
+			Node* ptr = head;	// when a new node added to existing node and not the first index
+			for (int i = 1; i < index; i++) {
+				ptr = ptr->next;
 			}
+			node->next = ptr->next;
+			ptr->next = node;
+			length++;
 		}
 	}
 }
@@ -88,14 +85,11 @@ inline void LinkedList::List<T>::update(int index, T value) {
 		std::cerr << "\nindex out of range!\n";
 	}
 	else {
-		int i = 0;
-		for (Node* ptr = head; ptr!=nullptr; ptr = ptr->next) {
-			if (index == i) {
-				ptr->info = value;
-				break;
-			}
-			i++;
+		Node* ptr = head;
+		for (int i = 1;i < index; i++) {
+			ptr = ptr->next;
 		}
+		ptr->info = value;
 	}
 }
 
@@ -114,18 +108,15 @@ inline void LinkedList::List<T>::pop(int index) {
 		length--;
 	}
 	else {
-		int i = 1;	// catching the node before the node to be deleted
-		for (Node* ptr = head; ptr!=nullptr; ptr = ptr->next) {
-			if (index == i) {	// node just before the node to be deleted
-				temp = ptr->next;	// saving the pointer to the node to be deleted
-				// pointing the node before to the node after the node to be deleted
-				ptr->next = ptr->next->next;
-				delete temp;	// delete the node requested
-				length--;
-				break;
-			}
-			i++;
+		Node* ptr = head;
+		for (int i = 1; i < index; i++) {
+			ptr = ptr->next;
 		}
+		temp = ptr->next;	// saving the pointer to the node to be deleted
+		// pointing the node before to the node after the node to be deleted
+		ptr->next = ptr->next->next;
+		delete temp;	// delete the node requested
+		length--;
 	}
 }
 

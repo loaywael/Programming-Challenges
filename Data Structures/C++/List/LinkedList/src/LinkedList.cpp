@@ -22,26 +22,26 @@ inline LinkedList::List<T>::~List() {
 
 template<class T>
 inline void LinkedList::List<T>::insert(T item, int index) {
-	Node* node = new Node;
-	if (!node){
+	Node* node = new Node;	// create the new node
+	if (!node){		// make sure it is created
 		std::cerr << "can't allocate memory for that item!\n";
 	}
-	else if (!_isInRange(index)) {
+	else if (!_isInRange(index)) {	// check for a correct index
 		std::cerr << "\nindex out of range!\n";
 	}
 	else{
-		node->info = item;
-		node->next = nullptr;
-		if (_isEmpty() || index == 0) {
-			node->next = head;
-			head = node;
+		node->info = item; // store the value of the new node
+		node->next = nullptr;	// make it initially point to nothing
+		if (_isEmpty() || index == 0) {	// in-case of first node, or insertion @index(0)
+			node->next = head; 	// let it point to the old-head if exists, null if it's the first
+			head = node;	//	let the new added node be the new head
 			length++;
 		}
 
 		else{
-			int i = 1;
+			int i = 1;	// when a new node added to existing node and not the first index
 			for (Node* ptr = head; ptr!=nullptr; ptr= ptr->next) {
-				if (i == index) {
+				if (i == index) {	// iterating
 					node->next = ptr->next;
 					ptr->next = node;
 					length++;
@@ -67,18 +67,17 @@ inline void LinkedList::List<T>::insert(T item) {
 			length++;
 		}
 		else{
-			int i = 0;
-			for (Node* ptr = head; ptr!=nullptr; ptr= ptr->next) {
-				if (ptr->next == nullptr) {
+			for (Node* ptr = head; ptr != nullptr; ptr= ptr->next) {
+				if (ptr->next == nullptr){
 					ptr->next = node;
 					length++;
 					break;
 				}
-				i++;
 			}
 		}
 	}
 }
+
 
 template<class T>
 inline void LinkedList::List<T>::update(int index, T value) {
@@ -108,19 +107,20 @@ inline void LinkedList::List<T>::pop(int index) {
 	else if (!_isInRange(index)){
 		std::cerr << "\nindex out of range!\n";
 	}
-	else if (index == 0) {
-		temp = head;
-		head = head->next;
-		delete temp;
+	else if (index == 0) {	// when deleting the head
+		temp = head;	// save the pointer to the head to be deleted
+		head = head->next;	// move/update the head forward by one
+		delete temp;	// delete the older head
 		length--;
 	}
 	else {
-		int i = 1;
+		int i = 1;	// catching the node before the node to be deleted
 		for (Node* ptr = head; ptr!=nullptr; ptr = ptr->next) {
-			if (index == i) {
-				temp = ptr->next;
+			if (index == i) {	// node just before the node to be deleted
+				temp = ptr->next;	// saving the pointer to the node to be deleted
+				// pointing the node before to the node after the node to be deleted
 				ptr->next = ptr->next->next;
-				delete temp;
+				delete temp;	// delete the node requested
 				length--;
 				break;
 			}

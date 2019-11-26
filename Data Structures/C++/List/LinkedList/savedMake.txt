@@ -52,3 +52,45 @@ LinkedList.o : $(SRC)/LinkedList.cpp
 main.o 		 : $(SRC)/main.cpp
 
 
+# ==============================================
+
+#####################################
+# 
+#####################################
+
+CXX = g++
+SRC_LOC = ../src
+
+#LIBS_LOC = ../lib
+LIBS = -lm
+
+CFLAGS = -I$(SRC_LOC) -Wall -c -o
+LFALGS = -I$(SRC_LOC) $(LIBS) -Wall -o
+
+_DEPS = LinkedList.hpp
+DEPS = $(patsubst %,$(SRC_LOC)/%,$(_DEPS))
+
+OBJ_LOC = ./obj
+_OBJS = main.o LinkedList.o
+OBJS = $(patsubst %,$(OBJ_LOC)/%,$(_OBJS))
+
+$(OBJ_LOC)/%.o: $(SRC_LOC)/%.cpp $(DEPS)
+	$(CXX) $(CFLAGS) $@ $< 
+
+#Program Name
+PROG = run
+
+# All Target
+all : $(PROG) 
+
+
+$(PROG) : $(OBJS)
+	$(CXX) $(LFALGS) $@ $^
+
+.PHONY : clean
+
+clean :
+	rm $(OBJ_LOC)/*.o *~ core
+
+
+

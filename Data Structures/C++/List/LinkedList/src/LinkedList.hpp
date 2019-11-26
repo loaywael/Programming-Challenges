@@ -1,9 +1,9 @@
 /*
- * LinkedList.hpp
- *
- *  Created on: Nov 23, 2019
- *      Author: ezio
- */
+* LinkedList.hpp
+*
+*  Created on: Nov 23, 2019
+*      Author: ezio
+*/
 
 #ifndef LINKEDLIST_HPP_
 #define LINKEDLIST_HPP_
@@ -21,7 +21,6 @@ private:
 	int length;
 	Node* head;
 	Node* temp;
-	Node* tail;
 public:
 	List();
 	~List();

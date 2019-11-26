@@ -55,10 +55,15 @@ int main(int argc, char** argv){
                 break;
 
             case '4':
-                std::cout << "enter item: ";
-                std::cin >> item;
-                idx = list.find(item);
-                std::cout << "found at index: " << idx << std::endl;
+            	try{
+            		std::cout << "enter item: ";
+					std::cin >> item;
+					idx = list.find(item);
+					std::cout << "found at index: " << idx << std::endl;
+				}
+            	catch (const std::string& e) {
+					std::cerr << e << std::endl;
+				}
                 break;
 
             case '5':
@@ -81,7 +86,7 @@ int main(int argc, char** argv){
                     std::cout << "item value: " << item << std::endl;
                     std::cout << std::endl;
                 }
-                catch (const char* e){
+                catch (const std::string& e){
                     item = 0;
                     std::cerr << e << std::endl;
                 }

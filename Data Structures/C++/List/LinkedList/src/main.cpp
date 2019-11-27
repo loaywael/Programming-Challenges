@@ -28,7 +28,8 @@ int main(int argc, char** argv){
         std::cout << "6. display list items." << std::endl;
         std::cout << "7. get list existing item." << std::endl;
         std::cout << "8. get list size." << std::endl;
-        std::cout << "9. exite." << std::endl << std::endl;
+        std::cout << "9. reverse list." << std::endl;
+        std::cout << "0. exite." << std::endl << std::endl;
 
         std::cout << "Select operation: ";
         std::cin >> ch;
@@ -98,9 +99,12 @@ int main(int argc, char** argv){
                 break;
 
             case '9':
-                std::cout << "program ended!\n" << std::endl;
-                return 0;
+                list.reverse();
+                break;
 
+            case '0':
+				std::cout << "program ended!\n" << std::endl;
+				return 0;
 
             default:
                 std::cerr << "incorrect input! choose a correct number!\n\n";

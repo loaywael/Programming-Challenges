@@ -20,7 +20,8 @@ private:
 	};
 	int length;
 	Node* head;
-	Node* temp;
+	Node* temp1;
+	Node* temp2;
 public:
 	List();
 	~List();
@@ -29,6 +30,7 @@ public:
 	void update(int index, T value);
 	void pop(int index);
 	void display();
+	void reverse();
 	bool _isEmpty();
 	bool _isInRange(int idx);
 	void clean();

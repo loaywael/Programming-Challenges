@@ -10,7 +10,7 @@
 
 template<class T>
 inline LinkedList::List<T>::List() {
-	head = temp = nullptr;
+	head = temp1 = temp2 = nullptr;
 	length = 0;
 }
 
@@ -102,9 +102,9 @@ inline void LinkedList::List<T>::pop(int index) {
 		std::cerr << "\nindex out of range!\n";
 	}
 	else if (index == 0) {	// when deleting the head
-		temp = head;	// save the pointer to the head to be deleted
+		temp1 = head;	// save the pointer to the head to be deleted
 		head = head->next;	// move/update the head forward by one
-		delete temp;	// delete the older head
+		delete temp1;	// delete the older head
 		length--;
 	}
 	else {
@@ -112,10 +112,10 @@ inline void LinkedList::List<T>::pop(int index) {
 		for (int i = 1; i < index; i++) {
 			ptr = ptr->next;
 		}
-		temp = ptr->next;	// saving the pointer to the node to be deleted
+		temp1 = ptr->next;	// saving the pointer to the node to be deleted
 		// pointing the node before to the node after the node to be deleted
 		ptr->next = ptr->next->next;
-		delete temp;	// delete the node requested
+		delete temp1;	// delete the node requested
 		length--;
 	}
 }
@@ -130,6 +130,27 @@ inline void LinkedList::List<T>::display() {
 }
 
 template<class T>
+inline void LinkedList::List<T>::reverse() {
+	/* strategy of pushing the first item to be the last */
+	Node* curr = head;	// let current pointer point to the first node
+	// break when current point to the last node
+	while (curr->next->next != nullptr) {
+		temp1 = curr->next;	// save the next node to the current pointer
+		temp2 = curr->next->next;	// save the following node of the next node
+		// move the next node of the current to be the first before the head
+		curr->next->next =  head;
+		// let head point to the saved following node of the next node of the current
+		head->next = temp2;
+		head = temp1;	// update the head to be the saved next node to the current
+	}
+	// -------------- special case when current point to last node -------------//
+	temp1 = curr->next;	// save the last node
+	curr->next->next =  head;	// move the last node to be the first
+	head = temp1;	// update the head to be the last node moved to be the first
+	curr->next = nullptr;	// make the current node which should be the last node point to null
+}
+
+template<class T>
 inline bool LinkedList::List<T>::_isEmpty() {
 	return length == 0;
 }
@@ -137,11 +158,11 @@ inline bool LinkedList::List<T>::_isEmpty() {
 template<class T>
 inline void LinkedList::List<T>::clean() {
 	while (head != nullptr) {
-		temp = head;
+		temp1 = head;
 		head = head->next;
-		delete temp;
+		delete temp1;
 	}
-	temp = head = nullptr;
+	temp1 = head = nullptr;
 	length = 0;
 }
 

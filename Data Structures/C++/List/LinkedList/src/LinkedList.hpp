@@ -1,8 +1,9 @@
 /*
 * LinkedList.hpp
 *
-*  Created on: Nov 23, 2019
-*      Author: ezio
+* Created on: Nov 23, 2019
+*
+* Author: ezio
 */
 
 #ifndef LINKEDLIST_HPP_
@@ -20,15 +21,14 @@ private:
 	};
 	int length;
 	Node* head;
-	Node* temp1;
-	Node* temp2;
 public:
 	List();
 	~List();
 	void insert(T item, int index);
 	void insert(T item);
 	void update(int index, T value);
-	void pop(int index);
+	void remove(T item);
+	void removeIndex(int index);
 	void display();
 	void reverse();
 	bool _isEmpty();

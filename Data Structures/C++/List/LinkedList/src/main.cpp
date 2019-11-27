@@ -51,8 +51,8 @@ int main(int argc, char** argv){
 
             case '3':
                 std::cout << "enter item index: ";
-                std::cin >> idx;
-                list.pop(idx);
+                std::cin >> item;
+                list.remove(item);
                 break;
 
             case '4':

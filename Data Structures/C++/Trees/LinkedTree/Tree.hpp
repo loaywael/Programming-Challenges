@@ -27,6 +27,8 @@ template <class T>
 void inOrder(Node<T>* n);
 template <class T>
 void preOrder(Node<T>* n);
+void buildTree(T item);
+void buildTree(T item);
 
 #endif /* TREE_HPP_ */
 

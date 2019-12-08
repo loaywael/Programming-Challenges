@@ -8,54 +8,51 @@
 
 #include <iostream>
 #include <queue>
-
+#include "Tree.hpp"
 
 template <class T>
-struct Node {
-	Node* nxtLeft;
-	T item;
-	Node* nxtRight;
-};
-
-void preOrder(Node<int>* n) {
+void preOrder(Node<T>* n) {
 	if (n == nullptr) {
 		return;
 	}
-	std::cout << n->item << std::endl;
+	std::cout << n->item << " ";
 	preOrder(n->nxtLeft);
 	preOrder(n->nxtRight);
 }
 
-void inOrder(Node<int>* n) {
+template <class T>
+void inOrder(Node<T>* n) {
 	if (n == nullptr) {
 		return;
 	}
 	inOrder(n->nxtLeft);
-	std::cout << n->item << std::endl;
+	std::cout << n->item << " ";
 	inOrder(n->nxtRight);
 }
 
-void postOrder(Node<int>* n) {
+template <class T>
+void postOrder(Node<T>* n) {
 	if (n == nullptr) {
 		return;
 	}
 	postOrder(n->nxtLeft);
 	postOrder(n->nxtRight);
-	std::cout << n->item << std::endl;
+	std::cout << n->item << " ";
 }
 
-void levelOrder(Node<int>* n) {
+template <class T>
+void levelOrder(Node<T>* n) {
 	if (n == nullptr) {
 		std::cout << "Tree is empty!" << std::endl;
 		return;
 	}
-	std::queue<Node<int>*> Q;
+	std::queue<Node<T>*> Q;
 	Q.emplace(n);
 	while (!Q.empty()) {	// terminates when all nodes are discovered
 		// each time gets updated by the new queue head
-		Node<int>* curr = Q.front();
+		Node<T>* curr = Q.front();
 		std::cout << curr->item << " ";
-		int item = Q.pop();
+		Q.pop();
 		if (curr->nxtLeft != nullptr) {
 			Q.emplace(curr->nxtLeft);
 		}
@@ -66,7 +63,8 @@ void levelOrder(Node<int>* n) {
 	}
 }
 
-int treeHeight(Node<int>* n) {
+template <class T>
+int treeHeight(Node<T>* n) {
 	int lh, rh;
 	if (n == nullptr) {
 		return 0;
@@ -80,3 +78,19 @@ int treeHeight(Node<int>* n) {
 		return rh + 1;
 	}
 }
+
+template <class T>
+Node<T>* getNode(T item) {
+	Node<T>* n = new Node<T>;
+	n->item = item;
+	n->nxtLeft = n->nxtRight = nullptr;
+	return n;
+}
+
+template Node<int>* getNode(int);
+template void levelOrder(Node<int>* n);
+template void preOrder<int>(Node<int>*);
+template void inOrder<int>(Node<int>*);
+template void postOrder<int>(Node<int>*);
+template int treeHeight<int>(Node<int>*);
+

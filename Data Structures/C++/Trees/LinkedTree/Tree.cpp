@@ -104,6 +104,20 @@ Node<T>* binarySearch(T item, Node<T>* root) {
 	return nullptr;
 }
 
+//template <class T>
+//Node<T>* binarySearch(T item, Node<T>* n) {
+//	if (n == nullptr) {
+//		return nullptr;
+//	}
+//	if (n->item > item) {
+//		return binarySearch(item, n->nxtLeft);
+//	}
+//	if (n->item < item) {
+//		return binarySearch(item, n->nxtRight);
+//	}
+//	return n;
+//}
+
 template Node<int>* getNode(int);
 template void levelOrder(Node<int>* n);
 template void preOrder<int>(Node<int>*);

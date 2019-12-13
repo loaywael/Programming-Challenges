@@ -41,5 +41,7 @@ int main(int argc, char **argv) {
 		std::cout << "item couldn't be found! \n";
 	}
 
+	std::cout << "item @address: " << ptr << " is: " << ptr->item << std::endl;
+
 	return 0;
 }

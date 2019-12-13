@@ -104,6 +104,53 @@ Node<T>* binarySearch(T item, Node<T>* root) {
 	return nullptr;
 }
 
+
+template <class T>
+Node<T>* getMax(Node<T>* root) {
+	if (root == nullptr) {
+			return nullptr;
+	}
+	Node<T>* n = root;
+	while (n->nxtRight != nullptr) {
+		 n = n->nxtRight;
+		}
+	return n;
+}
+
+//template <class T>
+//Node<T>* getMax(Node<T>* root) {
+//	if (root == nullptr) {
+//		return nullptr;
+//	}
+//	if (root->nxtRight == nullptr) {
+//			return root;
+//	}
+//	return getMax(root->nxtRight);
+//}
+
+template <class T>
+Node<T>* getMin(Node<T>* root) {
+	if (root == nullptr) {
+				return nullptr;
+		}
+	Node<T>* n = root;
+	while (n->nxtLeft != nullptr) {
+		 n = n->nxtLeft;
+		}
+	return n;
+}
+
+//template <class T>
+//Node<T>* getMin(Node<T>* root) {
+//	if (root == nullptr) {
+//		return nullptr;
+//	}
+//	if (root->nxtLeft == nullptr) {
+//			return root;
+//	}
+//	return getMin(root->nxtLeft);
+//}
+
 //template <class T>
 //Node<T>* binarySearch(T item, Node<T>* n) {
 //	if (n == nullptr) {
@@ -125,3 +172,7 @@ template void inOrder<int>(Node<int>*);
 template void postOrder<int>(Node<int>*);
 template int treeHeight<int>(Node<int>*);
 template Node<int>* binarySearch(int, Node<int>* root);
+template Node<int>* getMax(Node<int>* root);
+template Node<int>* getMin(Node<int>* root);
+
+

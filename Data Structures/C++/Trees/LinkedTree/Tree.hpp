@@ -42,5 +42,11 @@ void buildTree(T item);
 template <class T>
 Node<T>* binarySearch(T item, Node<T>* root);
 
+template <class T>
+Node<T>* getMax(Node<T>* root);
+
+template <class T>
+Node<T>* getMin(Node<T>* root);
+
 #endif /* TREE_HPP_ */
 

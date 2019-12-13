@@ -87,10 +87,27 @@ Node<T>* getNode(T item) {
 	return n;
 }
 
+template <class T>
+Node<T>* binarySearch(T item, Node<T>* root) {
+	Node<T>* n = root;
+	while (n != nullptr) {
+		if (n->item > item) {
+			 n = n->nxtLeft;
+		}
+		else if (n->item < item) {
+			 n = n->nxtRight;
+		}
+		else {
+			return n;
+		}
+	}
+	return nullptr;
+}
+
 template Node<int>* getNode(int);
 template void levelOrder(Node<int>* n);
 template void preOrder<int>(Node<int>*);
 template void inOrder<int>(Node<int>*);
 template void postOrder<int>(Node<int>*);
 template int treeHeight<int>(Node<int>*);
-
+template Node<int>* binarySearch(int, Node<int>* root);

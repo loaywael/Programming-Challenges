@@ -32,5 +32,14 @@ int main(int argc, char **argv) {
 	std::cout << "tree-height: " << treeHeight<int>(root);
 	std::cout<< std::endl;
 
+	int item = 7;
+	Node<int>* ptr = binarySearch<int>(item, root);
+	if (ptr != nullptr) {
+		std::cout << "item: " << item << " was found @address: " << ptr << std::endl;
+	}
+	else {
+		std::cout << "item couldn't be found! \n";
+	}
+
 	return 0;
 }

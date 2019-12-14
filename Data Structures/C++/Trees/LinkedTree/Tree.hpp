@@ -48,5 +48,11 @@ Node<T>* getMax(Node<T>* root);
 template <class T>
 Node<T>* getMin(Node<T>* root);
 
+template <class T>
+void insert(T item, Node<T>* root);
+
+template <class T>
+Node<T>* insert(T item, Node<T>* root);
+
 #endif /* TREE_HPP_ */
 

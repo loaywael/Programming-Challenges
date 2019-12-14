@@ -10,6 +10,7 @@
 #include <queue>
 #include "Tree.hpp"
 
+
 template <class T>
 void preOrder(Node<T>* n) {
 	if (n == nullptr) {
@@ -165,6 +166,60 @@ Node<T>* getMin(Node<T>* root) {
 //	return n;
 //}
 
+
+template <class T>
+void insert(T item, Node<T>* root) {
+	Node<T>* current = root;
+	Node<T>* parrent = current;
+
+	while(current != nullptr) {
+		parrent = current;
+		if (current->item > item) {
+			current = current->nxtLeft;
+		}
+		else if (current->item < item) {
+			current = current->nxtRight;
+		}
+		else {
+			std::cout << "item already exists!\n";
+			return;
+		}
+	}
+	Node<T>* n = getNode(item);
+	n->item = item;
+	if (root == nullptr) {
+		root = n;
+	}
+	else if (parrent->item > item) {
+		parrent->nxtLeft = n;
+	}
+	else {
+		parrent->nxtRight = n;
+	}
+}
+
+
+template <class T>
+Node<T>* insert(T item, Node<T>* root) {
+	static Node<T>* parrent = root;
+	if (root == nullptr) {
+		root = getNode(item);
+	}
+	else if (root->item > item) {
+		root->nxtLeft = insert(item, root->nxtLeft);
+	}
+	else if (root->item < item) {
+		root->nxtRight = insert(item, root->nxtRight);
+	}
+	else {
+		std::cout << "item already exists!\n";
+	}
+	return root;
+}
+
+
+
+/*Resolving the compiler linking for template methods*/
 template Node<int>* getNode(int);
 template void levelOrder(Node<int>* n);
 template void preOrder<int>(Node<int>*);
@@ -174,5 +229,6 @@ template int treeHeight<int>(Node<int>*);
 template Node<int>* binarySearch(int, Node<int>* root);
 template Node<int>* getMax(Node<int>* root);
 template Node<int>* getMin(Node<int>* root);
-
+template void insert(int item, Node<int>* root);
+template Node<int>* insert(int item, Node<int>* root);
 

@@ -13,9 +13,9 @@ void SelectionSort(std::vector<T>& arr) {
     T temp{0};
     int minId = 0;
     int arrSize = arr.size();
-    for (int i{0}; i < arrSize; i++) {
+    for (int i{0}; i < arrSize - 1; i++) {
         minId = i;
-        for (int j{i}; j < arrSize; j++) {
+        for (int j{i+1}; j < arrSize; j++) {
             if (arr[j] < arr[minId]) {
                 minId = j;
             }

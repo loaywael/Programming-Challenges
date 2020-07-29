@@ -20,12 +20,12 @@ int main(int argc, char** argv) {
     // printArray<int>("sorted:", MergeSort<int>(testArr));
 
     printArray<int>("src: ", Vsrc1);
-    Vsrc1 = MergeSort<int>(Vsrc1);
+    Vsrc1 = MergeSort<int>::sort(Vsrc1);
     printArray<int>("sorted: ", Vsrc1);
     printArray("correct: ", Vtest1);
 
-    Vsrc2 = MergeSort<int>(Vsrc2);
-    Vsrc3 = MergeSort<int>(Vsrc3);
+    Vsrc2 = MergeSort<int>::sort(Vsrc2);
+    Vsrc3 = MergeSort<int>::sort(Vsrc3);
     
     assert(Vtest1 == Vsrc1);
     assert(Vtest2 == Vsrc2);
